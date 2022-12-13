@@ -5,7 +5,64 @@ volatile byte min_ct = 0;
 volatile byte hr_ct = 12;
 volatile bool displayflag = false;
 
+#define pressTime 2000   // Time in milliseconds that makes a button press a "long" press
+#define BUTTON_PRESSED PORTA.IN & PIN1_bm // Used to check if PA1 = HIGH, therefore button is pressed
+#define LONG_PRESS 2
+#define PRESS 1
+#define NO_PRESS 0
+
+#define displayTime 5000 // Time in milliseconds to display watch face before sleep
+
 void setup() {
+  byte calibrate_state = 0; // Calibration state: 0 = hours, 1 = minutes, 2 = done
+  
+  // Button setup
+  PORTA.DIR = PIN1_bp;  // Set PA1 input
+
+  // Calibration mode - Only entered once on powerup after battery change
+  while(calibrate_state < 2) {
+    switch(calibrate_state) {
+      case 0:
+        writeHours(hr_ct);
+        
+        switch(buttonPress()) {
+          case NO_PRESS:
+            break;
+          case PRESS:
+            hr_ct++;
+            if(hr_ct == 13)
+              hr_ct = 1;
+            break;
+          case LONG_PRESS:
+            calibrate_state++;
+            break;
+        }
+        break;
+
+      case 1:
+        writeMinutes(min_ct);
+
+        switch(buttonPress()) {
+          case NO_PRESS:
+            break;
+          case PRESS:
+            min_ct++;
+            if(min_ct == 60)
+              min_ct = 0;
+            break;
+          case LONG_PRESS:
+            calibrate_state++;
+            break;
+        }
+        break;
+    }
+  }
+
+  clearLEDs();
+
+  // Button interrupt setup
+  PORTA.PIN1CTRL = PORT_ISC_BOTHEDGES_gc; // enable interrupt on change (allows wake-up function in standby)
+  
   // RTC setup
   RTC.CLKSEL = RTC_CLKSEL_INT32K_gc;    // 32.768kHz Internal Crystal Oscillator (INT32K)
   while (RTC.STATUS > 0);               // Wait for all registers to be synchronized
@@ -15,20 +72,17 @@ void setup() {
   | RTC_RTCEN_bm                        // Enable: enabled 
   | RTC_RUNSTDBY_bm;                    // Run In Standby: enabled
 
-  // Button setup
-  PORTA.DIR = PIN1_bp;  // Set PA1 input
-  PORTA.PIN1CTRL = PORT_ISC_BOTHEDGES_gc; // enable interrupt on change (allows wake-up function)
-
   set_sleep_mode(SLEEP_MODE_STANDBY);  // Set sleep mode to STANDBY mode
   sleep_enable();
 }
 
 void loop() {
-  if(displayflag) {  // if PA1 high
+  if(displayflag) {  // if PA1 interrupt
     writeMinutes(min_ct);
     writeHours(hr_ct);
 
-    delay(1000);
+    uint32_t starttime = millis();
+    do{}while((millis() - starttime) < displayTime);
 
     clearLEDs();
     displayflag = false;
@@ -58,6 +112,21 @@ ISR(PORTA_PORT_vect) {
 
   PORTA.INTFLAGS = PIN1_bm; // Clear flag
   PORTA.PIN1CTRL = PORT_ISC_BOTHEDGES_gc; // enable interrupt on change
+}
+
+byte buttonPress(){
+  uint32_t startTime = 0;
+
+  if(BUTTON_PRESSED) {
+    startTime = millis();   // Start Non-Interrupting Timer
+
+    while(BUTTON_PRESSED){
+      if((millis() - startTime) >= pressTime)
+        return LONG_PRESS; // Return long press value
+    }
+    return PRESS; // Pressed, but no long press
+  }
+  return NO_PRESS; // Button was not pressed during function runtime
 }
 
 void writeMinutes(byte minutes) {
