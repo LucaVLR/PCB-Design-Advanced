@@ -274,12 +274,29 @@ void writeMinutes(byte minutes) {
 void writeHours(byte hours) {
   switch(hours) {
     case 1:
+      PORTB.DIR = PIN1_bp;    // Set B1 input
+      PORTA.DIR = PIN4_bp;    // Set A4 input
+      PORTB.OUTSET = PIN1_bp; // Write PB1 low, high impedance tri-state
+      PORTA.OUTSET = PIN4_bp; // Write PA4 low, high impedance tri-state
+
+      PORTA.DIR = PIN5_bm;  // Set A5 output
+      PORTB.DIR = PIN2_bm;  // Set B2 output
+
+      PORTA.OUTSET = PIN5_bm; // Write PA5 High - Atomic operation taking 2-3 words, 2-3 clocks
+      PORTB.OUTCLR = PIN2_bm; // Write PB2 Low - Atomic operation taking 2-3 words, 2-3 clocks
       break;
 
     case 2:
       break;
 
     case 3:
+      PORTB.DIR = PIN1_bp | PIN2_bp;    // Set B1, B2 input
+      PORTB.OUTSET = PIN1_bp | PIN2_bp; // Write PB1 PB2 low, high impedance tri-state
+
+      PORTA.DIR = PIN4_bm | PIN5_bm;              // Set A4 A5 output
+
+      PORTA.OUTSET = PIN4_bm; // Write PA4 High - Atomic operation taking 2-3 words, 2-3 clocks
+      PORTA.OUTCLR = PIN5_bm; // Write PA5 Low - Atomic operation taking 2-3 words, 2-3 clocks
       break;
 
     case 4:
@@ -295,6 +312,13 @@ void writeHours(byte hours) {
       break;
 
     case 8:
+      PORTA.DIR = PIN4_bp | PIN5_bp;    // Set A4, A5 input
+      PORTA.OUTSET = PIN4_bp | PIN5_bp; // Write PA4 PA5 low, high impedance tri-state
+
+      PORTB.DIR = PIN1_bm | PIN2_bm;    // Set B1 B2 output
+
+      PORTB.OUTSET = PIN2_bm; // Write PB2 High - Atomic operation taking 2-3 words, 2-3 clocks
+      PORTB.OUTCLR = PIN1_bm; // Write PB1 Low - Atomic operation taking 2-3 words, 2-3 clocks
       break;
 
     case 9:
@@ -304,9 +328,23 @@ void writeHours(byte hours) {
       break;
 
     case 11:
+      PORTA.DIR = PIN4_bp | PIN5_bp;    // Set A4, A5 input
+      PORTA.OUTSET = PIN4_bp | PIN5_bp; // Write PA4 PA5 low, high impedance tri-state
+
+      PORTB.DIR = PIN1_bm | PIN2_bm;    // Set B1 B2 output
+
+      PORTB.OUTSET = PIN1_bm; // Write PB1 High - Atomic operation taking 2-3 words, 2-3 clocks
+      PORTB.OUTCLR = PIN2_bm; // Write PB2 Low - Atomic operation taking 2-3 words, 2-3 clocks
       break;
 
     case 12:
+      PORTB.DIR = PIN1_bp | PIN2_bp;    // Set B1, B2 input
+      PORTB.OUTSET = PIN1_bp | PIN2_bp; // Write PB1 PB2 low, high impedance tri-state
+
+      PORTA.DIR = PIN4_bm | PIN5_bm;              // Set A4 A5 output
+
+      PORTA.OUTSET = PIN5_bm; // Write PA5 High - Atomic operation taking 2-3 words, 2-3 clocks
+      PORTA.OUTCLR = PIN4_bm; // Write PA4 Low - Atomic operation taking 2-3 words, 2-3 clocks
       break;
   }
 }
