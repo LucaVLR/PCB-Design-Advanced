@@ -287,6 +287,16 @@ void writeHours(byte hours) {
       break;
 
     case 2:
+      PORTB.DIR = PIN2_bp;    // Set B2 input
+      PORTA.DIR = PIN4_bp;    // Set A4 input
+      PORTB.OUTSET = PIN2_bp; // Write PB2 low, high impedance tri-state
+      PORTA.OUTSET = PIN4_bp; // Write PA4 low, high impedance tri-state
+
+      PORTA.DIR = PIN5_bm;  // Set A5 output
+      PORTB.DIR = PIN1_bm;  // Set B1 output
+
+      PORTA.OUTSET = PIN5_bm; // Write PA5 High - Atomic operation taking 2-3 words, 2-3 clocks
+      PORTB.OUTCLR = PIN1_bm; // Write PB1 Low - Atomic operation taking 2-3 words, 2-3 clocks
       break;
 
     case 3:
@@ -300,15 +310,55 @@ void writeHours(byte hours) {
       break;
 
     case 4:
+      PORTB.DIR = PIN1_bp;    // Set B1 input
+      PORTA.DIR = PIN5_bp;    // Set A5 input
+      PORTB.OUTSET = PIN1_bp; // Write PB1 low, high impedance tri-state
+      PORTA.OUTSET = PIN5_bp; // Write PA5 low, high impedance tri-state
+
+      PORTA.DIR = PIN4_bm;  // Set A4 output
+      PORTB.DIR = PIN2_bm;  // Set B2 output
+
+      PORTA.OUTSET = PIN4_bm; // Write PA4 High - Atomic operation taking 2-3 words, 2-3 clocks
+      PORTB.OUTCLR = PIN2_bm; // Write PB2 Low - Atomic operation taking 2-3 words, 2-3 clocks
       break;
 
     case 5:
+      PORTB.DIR = PIN2_bp;    // Set B2 input
+      PORTA.DIR = PIN5_bp;    // Set A5 input
+      PORTB.OUTSET = PIN2_bp; // Write PB2 low, high impedance tri-state
+      PORTA.OUTSET = PIN5_bp; // Write PA5 low, high impedance tri-state
+
+      PORTA.DIR = PIN4_bm;  // Set A4 output
+      PORTB.DIR = PIN1_bm;  // Set B1 output
+
+      PORTA.OUTSET = PIN4_bm; // Write PA4 High - Atomic operation taking 2-3 words, 2-3 clocks
+      PORTB.OUTCLR = PIN1_bm; // Write PB1 Low - Atomic operation taking 2-3 words, 2-3 clocks
       break;
 
     case 6:
+      PORTB.DIR = PIN1_bp;    // Set B1 input
+      PORTA.DIR = PIN4_bp;    // Set A4 input
+      PORTB.OUTSET = PIN1_bp; // Write PB1 low, high impedance tri-state
+      PORTA.OUTSET = PIN4_bp; // Write PA4 low, high impedance tri-state
+
+      PORTA.DIR = PIN5_bm;  // Set A5 output
+      PORTB.DIR = PIN2_bm;  // Set B2 output
+
+      PORTB.OUTSET = PIN2_bm; // Write PB2 High - Atomic operation taking 2-3 words, 2-3 clocks
+      PORTA.OUTCLR = PIN5_bm; // Write PA5 Low - Atomic operation taking 2-3 words, 2-3 clocks
       break;
 
     case 7:
+      PORTB.DIR = PIN1_bp;    // Set B1 input
+      PORTA.DIR = PIN5_bp;    // Set A5 input
+      PORTB.OUTSET = PIN1_bp; // Write PB1 low, high impedance tri-state
+      PORTA.OUTSET = PIN5_bp; // Write PA5 low, high impedance tri-state
+
+      PORTA.DIR = PIN4_bm;  // Set A4 output
+      PORTB.DIR = PIN2_bm;  // Set B2 output
+
+      PORTB.OUTSET = PIN2_bm; // Write PB2 High - Atomic operation taking 2-3 words, 2-3 clocks
+      PORTA.OUTCLR = PIN4_bm; // Write PA4 Low - Atomic operation taking 2-3 words, 2-3 clocks
       break;
 
     case 8:
@@ -322,9 +372,29 @@ void writeHours(byte hours) {
       break;
 
     case 9:
+      PORTB.DIR = PIN2_bp;    // Set B2 input
+      PORTA.DIR = PIN4_bp;    // Set A4 input
+      PORTB.OUTSET = PIN2_bp; // Write PB2 low, high impedance tri-state
+      PORTA.OUTSET = PIN4_bp; // Write PA4 low, high impedance tri-state
+
+      PORTA.DIR = PIN5_bm;  // Set A5 output
+      PORTB.DIR = PIN1_bm;  // Set B1 output
+
+      PORTB.OUTSET = PIN1_bm; // Write PB1 High - Atomic operation taking 2-3 words, 2-3 clocks
+      PORTA.OUTCLR = PIN5_bm; // Write PA5 Low - Atomic operation taking 2-3 words, 2-3 clocks
       break;
 
     case 10:
+      PORTB.DIR = PIN2_bp;    // Set B2 input
+      PORTA.DIR = PIN5_bp;    // Set A5 input
+      PORTB.OUTSET = PIN2_bp; // Write PB2 low, high impedance tri-state
+      PORTA.OUTSET = PIN5_bp; // Write PA5 low, high impedance tri-state
+
+      PORTA.DIR = PIN4_bm;  // Set A4 output
+      PORTB.DIR = PIN1_bm;  // Set B1 output
+
+      PORTB.OUTSET = PIN1_bm; // Write PB1 High - Atomic operation taking 2-3 words, 2-3 clocks
+      PORTA.OUTCLR = PIN4_bm; // Write PA4 Low - Atomic operation taking 2-3 words, 2-3 clocks
       break;
 
     case 11:
