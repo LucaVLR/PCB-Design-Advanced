@@ -1,7 +1,7 @@
 #include <avr/sleep.h> 
 
 volatile byte sec_ct = 0;
-volatile byte min_ct = 0;
+volatile byte min_ct = 1;
 volatile byte hr_ct = 12;
 volatile bool displayflag = false;
 
@@ -18,7 +18,6 @@ void setup() {
   
   // Button setup
   PORTA.DIR = PIN1_bp;  // Set PA1 input
-  clearLEDs();
 
   // Calibration mode - Only entered once on powerup after battery change
   while(calibrate_state < 2) {
@@ -47,9 +46,9 @@ void setup() {
           case NO_PRESS:
             break;
           case PRESS:
-            min_ct +=5;
-            if(min_ct == 60)
-              min_ct = 0;
+            min_ct +=4;
+            if(min_ct >= 60)
+              min_ct = 1;
             break;
           case LONG_PRESS:
             calibrate_state++;
@@ -98,9 +97,9 @@ ISR(RTC_CNT_vect) {
   if(sec_ct == 60) {
     min_ct++;
     sec_ct = 0;
-    if(min_ct == 60) {
+    if(min_ct >= 60) {
       hr_ct++;
-      min_ct = 0;
+      min_ct = 1;
       if(hr_ct == 13)
         hr_ct = 1;
     }
