@@ -18,6 +18,7 @@ void setup() {
   
   // Button setup
   PORTA.DIR = PIN1_bp;  // Set PA1 input
+  clearLEDs();
 
   // Calibration mode - Only entered once on powerup after battery change
   while(calibrate_state < 2) {
@@ -274,8 +275,8 @@ void writeMinutes(byte minutes) {
 void writeHours(byte hours) {
   switch(hours) {
     case 1:
-      PORTB.DIR = PIN1_bp;    // Set B1 input
-      PORTA.DIR = PIN4_bp;    // Set A4 input
+      PORTB.DIRCLR = PIN1_bm;    // Set B1 input
+      PORTA.DIRCLR = PIN4_bm;    // Set A4 input
       PORTB.OUTSET = PIN1_bp; // Write PB1 low, high impedance tri-state
       PORTA.OUTSET = PIN4_bp; // Write PA4 low, high impedance tri-state
 
@@ -287,8 +288,8 @@ void writeHours(byte hours) {
       break;
 
     case 2:
-      PORTB.DIR = PIN2_bp;    // Set B2 input
-      PORTA.DIR = PIN4_bp;    // Set A4 input
+      PORTB.DIRCLR = PIN2_bm;    // Set B2 input
+      PORTA.DIRCLR = PIN4_bm;    // Set A4 input
       PORTB.OUTSET = PIN2_bp; // Write PB2 low, high impedance tri-state
       PORTA.OUTSET = PIN4_bp; // Write PA4 low, high impedance tri-state
 
@@ -300,7 +301,7 @@ void writeHours(byte hours) {
       break;
 
     case 3:
-      PORTB.DIR = PIN1_bp | PIN2_bp;    // Set B1, B2 input
+      PORTB.DIRCLR = PIN1_bm | PIN2_bm;    // Set B1, B2 input
       PORTB.OUTSET = PIN1_bp | PIN2_bp; // Write PB1 PB2 low, high impedance tri-state
 
       PORTA.DIR = PIN4_bm | PIN5_bm;              // Set A4 A5 output
@@ -310,8 +311,8 @@ void writeHours(byte hours) {
       break;
 
     case 4:
-      PORTB.DIR = PIN1_bp;    // Set B1 input
-      PORTA.DIR = PIN5_bp;    // Set A5 input
+      PORTB.DIRCLR = PIN1_bm;    // Set B1 input
+      PORTA.DIRCLR = PIN5_bm;    // Set A5 input
       PORTB.OUTSET = PIN1_bp; // Write PB1 low, high impedance tri-state
       PORTA.OUTSET = PIN5_bp; // Write PA5 low, high impedance tri-state
 
@@ -323,8 +324,8 @@ void writeHours(byte hours) {
       break;
 
     case 5:
-      PORTB.DIR = PIN2_bp;    // Set B2 input
-      PORTA.DIR = PIN5_bp;    // Set A5 input
+      PORTB.DIRCLR = PIN2_bm;    // Set B2 input
+      PORTA.DIRCLR = PIN5_bm;    // Set A5 input
       PORTB.OUTSET = PIN2_bp; // Write PB2 low, high impedance tri-state
       PORTA.OUTSET = PIN5_bp; // Write PA5 low, high impedance tri-state
 
@@ -336,8 +337,8 @@ void writeHours(byte hours) {
       break;
 
     case 6:
-      PORTB.DIR = PIN1_bp;    // Set B1 input
-      PORTA.DIR = PIN4_bp;    // Set A4 input
+      PORTB.DIRCLR = PIN1_bm;    // Set B1 input
+      PORTA.DIRCLR = PIN4_bm;    // Set A4 input
       PORTB.OUTSET = PIN1_bp; // Write PB1 low, high impedance tri-state
       PORTA.OUTSET = PIN4_bp; // Write PA4 low, high impedance tri-state
 
@@ -349,8 +350,8 @@ void writeHours(byte hours) {
       break;
 
     case 7:
-      PORTB.DIR = PIN1_bp;    // Set B1 input
-      PORTA.DIR = PIN5_bp;    // Set A5 input
+      PORTB.DIRCLR = PIN1_bm;    // Set B1 input
+      PORTA.DIRCLR = PIN5_bm;    // Set A5 input
       PORTB.OUTSET = PIN1_bp; // Write PB1 low, high impedance tri-state
       PORTA.OUTSET = PIN5_bp; // Write PA5 low, high impedance tri-state
 
@@ -362,7 +363,7 @@ void writeHours(byte hours) {
       break;
 
     case 8:
-      PORTA.DIR = PIN4_bp | PIN5_bp;    // Set A4, A5 input
+      PORTA.DIRCLR = PIN4_bm | PIN5_bm;    // Set A4, A5 input
       PORTA.OUTSET = PIN4_bp | PIN5_bp; // Write PA4 PA5 low, high impedance tri-state
 
       PORTB.DIR = PIN1_bm | PIN2_bm;    // Set B1 B2 output
@@ -372,8 +373,8 @@ void writeHours(byte hours) {
       break;
 
     case 9:
-      PORTB.DIR = PIN2_bp;    // Set B2 input
-      PORTA.DIR = PIN4_bp;    // Set A4 input
+      PORTB.DIRCLR = PIN2_bm;    // Set B2 input
+      PORTA.DIRCLR = PIN4_bm;    // Set A4 input
       PORTB.OUTSET = PIN2_bp; // Write PB2 low, high impedance tri-state
       PORTA.OUTSET = PIN4_bp; // Write PA4 low, high impedance tri-state
 
@@ -385,8 +386,8 @@ void writeHours(byte hours) {
       break;
 
     case 10:
-      PORTB.DIR = PIN2_bp;    // Set B2 input
-      PORTA.DIR = PIN5_bp;    // Set A5 input
+      PORTB.DIRCLR = PIN2_bm;    // Set B2 input
+      PORTA.DIRCLR = PIN5_bm;    // Set A5 input
       PORTB.OUTSET = PIN2_bp; // Write PB2 low, high impedance tri-state
       PORTA.OUTSET = PIN5_bp; // Write PA5 low, high impedance tri-state
 
@@ -398,7 +399,7 @@ void writeHours(byte hours) {
       break;
 
     case 11:
-      PORTA.DIR = PIN4_bp | PIN5_bp;    // Set A4, A5 input
+      PORTA.DIRCLR = PIN4_bm | PIN5_bm;    // Set A4, A5 input
       PORTA.OUTSET = PIN4_bp | PIN5_bp; // Write PA4 PA5 low, high impedance tri-state
 
       PORTB.DIR = PIN1_bm | PIN2_bm;    // Set B1 B2 output
@@ -408,7 +409,7 @@ void writeHours(byte hours) {
       break;
 
     case 12:
-      PORTB.DIR = PIN1_bp | PIN2_bp;    // Set B1, B2 input
+      PORTB.DIRCLR = PIN1_bm | PIN2_bm;    // Set B1, B2 input
       PORTB.OUTSET = PIN1_bp | PIN2_bp; // Write PB1 PB2 low, high impedance tri-state
 
       PORTA.DIR = PIN4_bm | PIN5_bm;              // Set A4 A5 output
@@ -420,12 +421,12 @@ void writeHours(byte hours) {
 }
 
 void clearLEDs() {
-  PORTC.DIR = PIN0_bp | PIN1_bp | PIN2_bp;  // Set C0, C1, C2 input
+  PORTC.DIRCLR = PIN0_bm | PIN1_bm | PIN2_bm;  // Set C0, C1, C2 input
   PORTC.OUTSET = PIN0_bp | PIN1_bp | PIN2_bp;// Write PC0, PC1, PC2 low, high impedance tri-state
   
-  PORTB.DIR = PIN0_bp | PIN1_bp | PIN2_bp;  // Set B0, B1, B2 input
+  PORTB.DIRCLR = PIN0_bm | PIN1_bm | PIN2_bm;  // Set B0, B1, B2 input
   PORTB.OUTSET = PIN0_bp | PIN1_bp | PIN2_bp;// Write PB0, PB1, PB2 low, high impedance tri-state
   
-  PORTA.DIR = PIN4_bp | PIN5_bp;            // Set A4, A5 input
+  PORTA.DIRCLR = PIN4_bm | PIN5_bm;            // Set A4, A5 input
   PORTA.OUTSET = PIN4_bp | PIN5_bp;         // Write PA4, PA5 low, high impedance tri-state
 }
