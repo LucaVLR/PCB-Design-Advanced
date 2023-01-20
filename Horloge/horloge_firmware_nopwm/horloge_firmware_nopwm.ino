@@ -133,7 +133,7 @@ byte buttonPress(){
 void writeMinutes(byte minutes) {
   switch(minutes) {
     case 0 ... 4:
-      PORTC.DIR = PIN0_bp | PIN1_bp;    // Set C0, C1 input
+      PORTC.DIRCLR = PIN0_bm | PIN1_bm;    // Set C0, C1 input
       PORTC.OUTSET = PIN0_bp | PIN1_bp; // Write PC0 PC1 low, high impedance tri-state
 
       PORTB.DIR = PIN0_bm;              // Set B0 output
@@ -144,7 +144,7 @@ void writeMinutes(byte minutes) {
       break;
       
     case 5 ... 9:
-      PORTC.DIR = PIN0_bp | PIN2_bp;
+      PORTC.DIRCLR = PIN0_bm | PIN2_bm;
       PORTC.OUTSET = PIN0_bp | PIN2_bp;
 
       PORTB.DIR = PIN0_bm;              // Set B0 output
@@ -155,7 +155,7 @@ void writeMinutes(byte minutes) {
       break;
       
     case 10 ... 14:
-      PORTC.DIR = PIN1_bp | PIN2_bp;    // Set C1, C2 input
+      PORTC.DIRCLR = PIN1_bm | PIN2_bm;    // Set C1, C2 input
       PORTC.OUTSET = PIN1_bp | PIN2_bp; // Write PC1 PC2 low, high impedance tri-state
 
       PORTB.DIR = PIN0_bm;              // Set B0 output
@@ -166,7 +166,7 @@ void writeMinutes(byte minutes) {
       break;
       
     case 15 ... 19:
-      PORTC.DIR = PIN0_bp | PIN1_bp;    // Set C0, C1 input
+      PORTC.DIRCLR = PIN0_bm | PIN1_bm;    // Set C0, C1 input
       PORTC.OUTSET = PIN0_bp | PIN1_bp; // Write PC0 PC1 low, high impedance tri-state
 
       PORTB.DIR = PIN0_bm;              // Set B0 output
@@ -177,8 +177,8 @@ void writeMinutes(byte minutes) {
       break;
       
     case 20 ... 24:
-      PORTC.DIR = PIN0_bp;    // Set C0 input
-      PORTB.DIR = PIN0_bp;    // Set B0 input
+      PORTC.DIRCLR = PIN0_bm;    // Set C0 input
+      PORTB.DIRCLR = PIN0_bm;    // Set B0 input
       PORTB.OUTSET = PIN0_bp; // Write PB0 low, high impedance tri-state
       PORTC.OUTSET = PIN0_bp; // Write PC0 low, high impedance tri-state
 
@@ -189,8 +189,8 @@ void writeMinutes(byte minutes) {
       break;
       
     case 25 ... 29:
-      PORTC.DIR = PIN1_bp;    // Set C1 input
-      PORTB.DIR = PIN0_bp;    // Set B0 input
+      PORTC.DIRCLR = PIN1_bm;    // Set C1 input
+      PORTB.DIRCLR = PIN0_bm;    // Set B0 input
       PORTB.OUTSET = PIN0_bp; // Write PB0 low, high impedance tri-state
       PORTC.OUTSET = PIN1_bp; // Write PC1 low, high impedance tri-state
 
@@ -201,7 +201,7 @@ void writeMinutes(byte minutes) {
       break;
       
     case 30 ... 34:
-      PORTC.DIR = PIN0_bp | PIN2_bp;    // Set C0, C2 input
+      PORTC.DIRCLR = PIN0_bm | PIN2_bm;    // Set C0, C2 input
       PORTC.OUTSET = PIN0_bp | PIN2_bp; // Write PC0 PC2 low, high impedance tri-state
 
       PORTB.DIR = PIN0_bm;              // Set B0 output
@@ -212,8 +212,8 @@ void writeMinutes(byte minutes) {
       break;
       
     case 35 ... 39:
-      PORTC.DIR = PIN0_bp;    // Set C0 input
-      PORTB.DIR = PIN0_bp;    // Set B0 input
+      PORTC.DIRCLR = PIN0_bm;    // Set C0 input
+      PORTB.DIRCLR = PIN0_bm;    // Set B0 input
       PORTB.OUTSET = PIN0_bp; // Write PB0 low, high impedance tri-state
       PORTC.OUTSET = PIN0_bp; // Write PC0 low, high impedance tri-state
 
@@ -224,8 +224,8 @@ void writeMinutes(byte minutes) {
       break;
       
     case 40 ... 44:
-      PORTC.DIR = PIN2_bp;    // Set C2 input
-      PORTB.DIR = PIN0_bp;    // Set B0 input
+      PORTC.DIRCLR = PIN2_bm;    // Set C2 input
+      PORTB.DIRCLR = PIN0_bm;    // Set B0 input
       PORTB.OUTSET = PIN0_bp; // Write PB0 low, high impedance tri-state
       PORTC.OUTSET = PIN0_bp; // Write PC0 low, high impedance tri-state
 
@@ -236,7 +236,7 @@ void writeMinutes(byte minutes) {
       break;
       
     case 45 ... 49:
-      PORTC.DIR = PIN1_bp | PIN2_bp;    // Set C1, C2 input
+      PORTC.DIRCLR = PIN1_bm | PIN2_bm;    // Set C1, C2 input
       PORTC.OUTSET = PIN1_bp | PIN2_bp; // Write PC1 PC2 low, high impedance tri-state
 
       PORTB.DIR = PIN0_bm;              // Set B0 output
@@ -247,8 +247,8 @@ void writeMinutes(byte minutes) {
       break;
       
     case 50 ... 54:
-      PORTC.DIR = PIN1_bp;    // Set C1 input
-      PORTB.DIR = PIN0_bp;    // Set B0 input
+      PORTC.DIRCLR = PIN1_bm;    // Set C1 input
+      PORTB.DIRCLR = PIN0_bm;    // Set B0 input
       PORTB.OUTSET = PIN0_bp; // Write PB0 low, high impedance tri-state
       PORTC.OUTSET = PIN1_bp; // Write PC1 low, high impedance tri-state
 
@@ -259,8 +259,8 @@ void writeMinutes(byte minutes) {
       break;
       
     case 55 ... 59:
-      PORTC.DIR = PIN2_bp;    // Set C2 input
-      PORTB.DIR = PIN0_bp;    // Set B0 input
+      PORTC.DIRCLR = PIN2_bm;    // Set C2 input
+      PORTB.DIRCLR = PIN0_bm;    // Set B0 input
       PORTB.OUTSET = PIN0_bp; // Write PB0 low, high impedance tri-state
       PORTC.OUTSET = PIN0_bp; // Write PC0 low, high impedance tri-state
 
