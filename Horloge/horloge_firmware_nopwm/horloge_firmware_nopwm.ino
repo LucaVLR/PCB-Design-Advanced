@@ -46,7 +46,7 @@ void setup() {
           case NO_PRESS:
             break;
           case PRESS:
-            min_ct++;
+            min_ct +=5;
             if(min_ct == 60)
               min_ct = 0;
             break;
